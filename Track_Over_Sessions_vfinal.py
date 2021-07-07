@@ -50,6 +50,7 @@ Waveforms_Allsamp = TF.conc_Allsamp(Waveforms_HA_c) # All Spike-waves
 pca = PCA(n_components=perc_pca)
 scaler = MaxAbsScaler()
 
+print('Fitting PCA')
 with parallel_backend('threading', n_jobs=6):
     Waveforms_Allsamp_standardized = scaler.fit_transform(Waveforms_Allsamp)
     Proj = pca.fit(Waveforms_Allsamp_standardized)
@@ -57,6 +58,7 @@ with parallel_backend('threading', n_jobs=6):
 
 Proj = []
 for i in range(len(Waveforms_HA_c)):
+    print("Transforming cluster:"+str(i))
     with parallel_backend('threading', n_jobs=6):
         Waveforms_HA_c_standardized = scaler.fit_transform(Waveforms_HA_c[i])
         Proj.append(np.transpose(pca.transform(Waveforms_HA_c_standardized)))
