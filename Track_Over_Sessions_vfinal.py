@@ -20,8 +20,8 @@ import scipy.io
 from scipy import signal
 
 folder = os.getcwd()
-from Track_Functions import Track_Functions   as TF
-os.chdir('/home/baran/Desktop/mouseLL2_spike_sorting_results/_sorted_spike_data') 
+import Track_Functions   as TF
+os.chdir('/home/baran/Desktop/mouseLL2_spike_sorting_results/_sorted_spike_data')
 # %% Extract Spikes from Structured Data file
 
 files = os.listdir()
