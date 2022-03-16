@@ -1,30 +1,14 @@
 """
 author: Tansel Baran Yasar
 
-This script is used for downsampling the raw multi-channel electrophysiology data stored in a binary .dat file with int16 format, and storing the downsampled LFP data in another binary .dat file also with int16 format. The script assumes the name of the data file is amplifier.dat. 
+This script is used for downsampling the raw multi-channel electrophysiology data stored in a binary .dat file with int16 format, and storing the downsampled LFP data in another binary .dat file also with int16 format. The script assumes the name of the data file is amplifier.dat.
 """
 
 import math
 import numpy as np
 from scipy.signal import filtfilt, butter, decimate
-
-def read_time_dat_file(filepath, sample_rate):
-    """
-    This function reads the time array from a time.dat file created by Intan software for a recording session,
-    and returns the time as a numpy array.
-
-    Inputs:
-        filepath: The path to the time.dat file to be read.
-        sample_rate: Sampling rate for the recording of interest.
-
-    Outputs:
-        time_file: Numpy array containing the time array (in s)
-    """
-
-    with open(filepath, 'rb') as fid:
-        raw_array = np.fromfile(fid, np.int32)
-    time_file = raw_array / float(sample_rate) #converting from int32 to seconds
-    return time_file
+import sys
+from additional_utils import read_time_dat_file
 
 ###########SET PARAMETERS HERE#################
 sample_rate = 20000
@@ -32,7 +16,7 @@ ds_sample_rate = 2000
 ds_factor = int(sample_rate / ds_sample_rate)
 num_channels = 256
 chunk_size = 60
-raw_data_dir = '/home/baran/Desktop/rTBY34/3_freely_behav_220307_130622'
+raw_data_dir = input('Enter the directory of the folder containing the "amplifier.dat" file')
 bit_to_uV = 0.195
 ##############################################33
 
